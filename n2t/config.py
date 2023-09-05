@@ -1,4 +1,4 @@
-from utils.dotdict import dotdict
+from n2t.utils.dotdict import dotdict
 
 cfg = dotdict(
     TISTORY=dotdict(

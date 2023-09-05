@@ -1,7 +1,7 @@
 import urllib
 
 from notion.client import NotionClient
-from clients.NotionClient import Notion
+from n2t.clients.NotionClient import Notion
 import requests
 from tqdm import tqdm
 from time import sleep

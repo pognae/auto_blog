@@ -1,11 +1,11 @@
-from clients.TistoryClient import TistoryClient
-from clients.SeleniumClient import SeleniumClient
-from clients.NotionClient import Notion
-from clients.ExportClient import NotionBackUpClient
+from n2t.clients.TistoryClient import TistoryClient
+from n2t.clients.SeleniumClient import SeleniumClient
+from n2t.clients.NotionClient import Notion
+from n2t.clients.ExportClient import NotionBackUpClient
 from notion.block import CodeBlock
-from utils.utils import *
-from utils.parse import *
-from clients.GmailClient import *
+from n2t.utils.utils import *
+from n2t.utils.parse import *
+from n2t.clients.GmailClient import *
 from datetime import datetime
 import sys, os
 import warnings
@@ -160,10 +160,12 @@ class Notion2Tistory:
         page[0].set_property(cfg.NOTION.COLUMN.URL, BeautifulSoup(resp_post.text, 'lxml').find('url').text)
 
 
-if __name__ == '__main__':
-    from config import cfg
+def n2t_exe():
+# if __name__ == '__main__':
+    from n2t.config import cfg
 
     try:
+        print("execute N2T")
         # create Notion2Tistory client
         client = Notion2Tistory(cfg, sleep_time=5, selenium_debug=False)
 

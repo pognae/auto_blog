@@ -4,8 +4,7 @@ from apscheduler.schedulers.background import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from database import *
 from hot_deal import getDeal
-
-
+from n2t.n2t import n2t_exe
 
 # load .env
 load_dotenv()
@@ -33,19 +32,20 @@ def main(debug):
     init_db()
 
     # 명시적이므로 method를 사용하도록 함.
-    if debug == '0':
+    if debug == "0":
         sched = BlockingScheduler(timezone='Asia/Seoul')
         # sched.add_job(job, 'interval', seconds=3, id='test', args=['hello?'])
         sched.add_job(getDeal, 'interval', seconds=3600, id='getDeal', args=['start'])
         sched.start()
-    elif debug == '1':
+    elif debug == "1":
         getDeal('start')
-    elif debug == '2':
+    elif debug == "2":
         print("111111111111111")
+        n2t_exe()
 
 
 if __name__ == '__main__':
     # print_hi('PyCharm')
-    debug = 2
+    debug = "2"
     main(debug)
 

@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from utils.parse import decode_b64
+from n2t.utils.parse import decode_b64
 
 
 class TistoryClient:
