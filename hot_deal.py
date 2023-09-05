@@ -23,6 +23,8 @@ twitter_api_key_secret = os.environ.get('twitter_api_key_secret')
 twitter_access_token = os.environ.get('twitter_access_token')
 twitter_access_token_secret = os.environ.get('twitter_access_token_secret')
 
+visibility = os.environ.get('visibility')
+
 def getDeal(data):
     if image_file_delete_all() != "Y":
         return 'Fail'
@@ -104,7 +106,7 @@ def post_write(title, image_url, post_url, key):
 
 
     # 본문
-    visibility = 3  # 0: 비공개 - 기본값, 1: 보호, 3: 발행
+    # visibility = 3  # 0: 비공개 - 기본값, 1: 보호, 3: 발행
     title_str = title.split(' ')
     tags = "핫딜," + ','.join(title_str)  # 태그는 쉼표로 구분
     content = '<p>' + test_image + '</p>'

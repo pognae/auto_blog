@@ -28,21 +28,24 @@ def job(data):
     print('data : ' + data)
 
 
-def main():
+def main(debug):
     # 디비 연결
     init_db()
 
     # 명시적이므로 method를 사용하도록 함.
-    sched = BlockingScheduler(timezone='Asia/Seoul')
-    # sched.add_job(job, 'interval', seconds=3, id='test', args=['hello?'])
-    sched.add_job(getDeal, 'interval', seconds=3600, id='getDeal', args=['start'])
-    sched.start()
-
-    # getDeal('start')
-
+    if debug == '0':
+        sched = BlockingScheduler(timezone='Asia/Seoul')
+        # sched.add_job(job, 'interval', seconds=3, id='test', args=['hello?'])
+        sched.add_job(getDeal, 'interval', seconds=3600, id='getDeal', args=['start'])
+        sched.start()
+    elif debug == '1':
+        getDeal('start')
+    elif debug == '2':
+        print("111111111111111")
 
 
 if __name__ == '__main__':
     # print_hi('PyCharm')
-    main()
+    debug = 2
+    main(debug)
 
