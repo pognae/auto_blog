@@ -1,15 +1,15 @@
 from dotenv import load_dotenv
 import os
 from apscheduler.schedulers.background import BlockingScheduler
-from apscheduler.schedulers.background import BackgroundScheduler
 from database import *
 from hot_deal import getDeal
-from n2t.n2t import n2t_exe
+from n2t import n2t_exe
 
 # load .env
 load_dotenv()
 
 mySecret = os.environ.get('MySecret')
+hotdeal_schedule_interval = os.environ.get('hotdeal_schedule_interval')
 
 
 
@@ -31,16 +31,18 @@ def main(debug):
     # 디비 연결
     init_db()
 
+    hotdeal_interval = hotdeal_schedule_interval * 3
+
     # 명시적이므로 method를 사용하도록 함.
     if debug == "0":
         sched = BlockingScheduler(timezone='Asia/Seoul')
         # sched.add_job(job, 'interval', seconds=3, id='test', args=['hello?'])
-        sched.add_job(getDeal, 'interval', seconds=3600, id='getDeal', args=['start'])
+        sched.add_job(getDeal, 'interval', seconds=hotdeal_interval, id='getDeal', args=['start'])
         sched.start()
     elif debug == "1":
         getDeal('start')
     elif debug == "2":
-        print("111111111111111")
+        # print("N2T Start")
         n2t_exe()
 
 

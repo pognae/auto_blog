@@ -26,7 +26,7 @@ class GMailClient:
 
 if __name__=='__main__':
 
-    from config_private import cfg
+    from config import cfg
 
     gclient = GMailClient(cfg.MAIL.ID, cfg.MAIL.KEY)
     gclient.send_mail(cfg.MAIL.ID, 'title', 'content')

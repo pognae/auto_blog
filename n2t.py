@@ -1,11 +1,11 @@
-from n2t.clients.TistoryClient import TistoryClient
-from n2t.clients.SeleniumClient import SeleniumClient
-from n2t.clients.NotionClient import Notion
-from n2t.clients.ExportClient import NotionBackUpClient
+from clients.TistoryClient import TistoryClient
+from clients.SeleniumClient import SeleniumClient
+from clients.NotionClient import Notion
+from clients.ExportClient import NotionBackUpClient
 from notion.block import CodeBlock
-from n2t.utils.utils import *
-from n2t.utils.parse import *
-from n2t.clients.GmailClient import *
+from utils.utils import *
+from utils.parse import *
+from clients.GmailClient import *
 from datetime import datetime
 import sys, os
 import warnings
@@ -149,7 +149,7 @@ class Notion2Tistory:
 
         resp_post = self.t_client.posting(title=title,
                                           content=content,
-                                          visibility=3,
+                                          visibility=0,
                                           category=category_id,
                                           tag=tags,
                                           modify_id=page[1])
@@ -160,9 +160,34 @@ class Notion2Tistory:
         page[0].set_property(cfg.NOTION.COLUMN.URL, BeautifulSoup(resp_post.text, 'lxml').find('url').text)
 
 
+
+
 def n2t_exe():
-# if __name__ == '__main__':
-    from n2t.config import cfg
+    from config import cfg
+
+    try:
+        print("execute N2T")
+        # create Notion2Tistory client
+        client = Notion2Tistory(cfg, sleep_time=5, selenium_debug=False)
+
+        # post pages
+        client.posts()
+
+        # get mail info
+        posted_page = [(page[0].title, page[0].get_property(cfg.NOTION.COLUMN.URL))
+                       for page in client.pages]
+        title, content = get_mail_content(posted_page)
+
+    except Exception as e:
+        error_msg = traceback.format_exc()
+        print(error_msg)
+
+        title, _ = get_mail_content(None)
+        content = str(error_msg)
+
+
+if __name__ == '__main__':
+    from config import cfg
 
     try:
         print("execute N2T")

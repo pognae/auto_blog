@@ -181,6 +181,13 @@ def get_target_blocks(page, target_block_type):
     return target_blocks
 
 
+def cond(x):
+    if x:
+        return x.startswith("notice_pop1") and not "notice_pop0" in x
+    else:
+        return False
+
+
 if __name__ == '__main__':
     htmls = get_html_path('~/.n2t')
     print(htmls)

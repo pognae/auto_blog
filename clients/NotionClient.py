@@ -10,6 +10,7 @@ class Notion:
 
         # access notion
         try:
+            print(notion_token)
             self.client = NotionClient(token_v2=notion_token)
             self.file_token = self.client.session.cookies.get('file_token')
             print('[진행중] Notion 로그인 완료')
@@ -58,7 +59,7 @@ class Notion:
 
 if __name__ == '__main__':
 
-    from config_private import cfg
+    from config import cfg
 
     client = Notion(notion_token=cfg.NOTION.TOKEN_V2)
     pages = client.get_pages_readyToPost(cfg.NOTION.TABLE_PAGE_URL,
