@@ -46,21 +46,22 @@ class Notion2Tistory:
         # selenium 시작
         self.s_client = SeleniumClient(sleep_time=sleep_time, is_hide=(not selenium_debug))
 
-        # selenium으로 kakao(tistory) 로그인, authorize code 발급받기(for OAuth)
-        try:
-            self.s_client.tistory_login(cfg.TISTORY.ID, cfg.TISTORY.PW)
-        except Exception as e:
-            print(e)
-            print('[오류] 카카오톡 로그인 실패')
-            sys.exit(1)
-        authorize_code = self.s_client.get_tistory_authorize_code(cfg.TISTORY.CLIENT_ID, cfg.TISTORY.REDIRECT_URI)
-
-        # 위에서 발급받은 code로 tistory 로그인(access_token 발급받기)
-        self.t_client = TistoryClient(authorize_code,
-                                      cfg.TISTORY.SECRET_KEY,
-                                      cfg.TISTORY.CLIENT_ID,
-                                      cfg.TISTORY.REDIRECT_URI,
-                                      cfg.TISTORY.BLOG_NAME)
+        # tistory는 api로 해결 가능함으로 로그인 필요없음
+        # # selenium으로 kakao(tistory) 로그인, authorize code 발급받기(for OAuth)
+        # try:
+        #     self.s_client.tistory_login(cfg.TISTORY.ID, cfg.TISTORY.PW)
+        # except Exception as e:
+        #     print(e)
+        #     print('[오류] 카카오톡 로그인 실패')
+        #     sys.exit(1)
+        # authorize_code = self.s_client.get_tistory_authorize_code(cfg.TISTORY.CLIENT_ID, cfg.TISTORY.REDIRECT_URI)
+        #
+        # # 위에서 발급받은 code로 tistory 로그인(access_token 발급받기)
+        # self.t_client = TistoryClient(authorize_code,
+        #                               cfg.TISTORY.SECRET_KEY,
+        #                               cfg.TISTORY.CLIENT_ID,
+        #                               cfg.TISTORY.REDIRECT_URI,
+        #                               cfg.TISTORY.BLOG_NAME)
 
         # selenium client 종료
         self.s_client.quit()
@@ -119,6 +120,8 @@ class Notion2Tistory:
 
     def parse_and_post(self, page, filepath):
         """download한 html파일을 parsing해서 업로드"""
+
+        from config import cfg
 
         # 테이블 속성값 가져오기
         try:

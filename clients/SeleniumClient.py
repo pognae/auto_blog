@@ -23,7 +23,9 @@ class SeleniumClient:
         options.add_argument("window-size=1920,1080")  # for notion 로그인 버튼
 
         # web driver 시작
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        # self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        from selenium.webdriver.chrome.service import Service as ChromeService
+        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
         print('[진행중] Selenium Chrome WebDriver 시작.. ')
         self.driver.implicitly_wait(self.t)
@@ -39,14 +41,17 @@ class SeleniumClient:
 
         try:
             # 아이디 입력
-            self.driver.find_element(By.XPATH, '//*[@id="id_email_2"]').send_keys(id)
+            # self.driver.find_element(By.XPATH, '//*[@id="id_email_2"]').send_keys(id)
+            self.driver.find_element(By.XPATH, '//*[@id="loginId--1"]').send_keys(id)
             sleep(self.t // 2)
             # 비밀번호 입력
-            self.driver.find_element(By.XPATH, '//*[@id="id_password_3"]').send_keys(pw)
+            # self.driver.find_element(By.XPATH, '//*[@id="id_password_3"]').send_keys(pw)
+            self.driver.find_element(By.XPATH, '//*[@id="password--2"]').send_keys(pw)
             sleep(self.t // 2)
 
             # 로그인 버튼 클릭
-            self.driver.find_element(By.XPATH, '//*[@id="login-form"]/fieldset/div[8]/button[1]').click()
+            # self.driver.find_element(By.XPATH, '//*[@id="login-form"]/fieldset/div[8]/button[1]').click()
+            self.driver.find_element(By.XPATH, '//*[@button="login-form"]/fieldset/div[8]/button[1]').click()
             sleep(self.t)
             print('[진행중] Selenium으로 티스토리(카카오) 로그인 완료!')
 
