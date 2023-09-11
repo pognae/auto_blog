@@ -10,7 +10,7 @@ class Notion:
 
         # access notion
         try:
-            print(notion_token)
+            # print(notion_token)
             self.client = NotionClient(token_v2=notion_token)
             self.file_token = self.client.session.cookies.get('file_token')
             print('[진행중] Notion 로그인 완료')

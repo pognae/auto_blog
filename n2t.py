@@ -10,9 +10,14 @@ from datetime import datetime
 import sys, os
 import warnings
 import traceback
+from dotenv import load_dotenv
 
 warnings.filterwarnings('ignore')
 
+load_dotenv()
+authorize_code = os.environ.get('code')
+access_token = os.environ.get('access_token')
+visibility = os.environ.get('visibility')
 
 class Notion2Tistory:
     def __init__(self, cfg, sleep_time=10, selenium_debug=False):
@@ -55,13 +60,14 @@ class Notion2Tistory:
         #     print('[오류] 카카오톡 로그인 실패')
         #     sys.exit(1)
         # authorize_code = self.s_client.get_tistory_authorize_code(cfg.TISTORY.CLIENT_ID, cfg.TISTORY.REDIRECT_URI)
-        #
-        # # 위에서 발급받은 code로 tistory 로그인(access_token 발급받기)
-        # self.t_client = TistoryClient(authorize_code,
-        #                               cfg.TISTORY.SECRET_KEY,
-        #                               cfg.TISTORY.CLIENT_ID,
-        #                               cfg.TISTORY.REDIRECT_URI,
-        #                               cfg.TISTORY.BLOG_NAME)
+
+        # 위에서 발급받은 code로 tistory 로그인(access_token 발급받기)
+        self.t_client = TistoryClient(authorize_code,
+                                      cfg.TISTORY.SECRET_KEY,
+                                      cfg.TISTORY.CLIENT_ID,
+                                      cfg.TISTORY.REDIRECT_URI,
+                                      cfg.TISTORY.BLOG_NAME,
+                                      access_token)
 
         # selenium client 종료
         self.s_client.quit()
@@ -152,7 +158,7 @@ class Notion2Tistory:
 
         resp_post = self.t_client.posting(title=title,
                                           content=content,
-                                          visibility=0,
+                                          visibility=visibility,
                                           category=category_id,
                                           tag=tags,
                                           modify_id=page[1])
