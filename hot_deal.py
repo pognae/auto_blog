@@ -66,7 +66,7 @@ def getDeal(data):
         url = bsObject.find('meta', {'property': 'og:url'}).get('content')
         key = url.split('/')[3]
         post_url = bsObject.find('a', 'hotdeal_url')["href"]
-        print("111111111111:" + post_url)
+        print("hotdeal_url:" + post_url)
 
         # testUsers = db_session.query(User).filter(User.name == 'test').first()
         # post_list = Post.query.filter(Post.post_key == key).first()
