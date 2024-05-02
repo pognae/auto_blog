@@ -31,7 +31,8 @@ def main(debug):
     # 디비 연결
     init_db()
 
-    hotdeal_interval = hotdeal_schedule_interval * 3
+    hotdeal_interval = int(hotdeal_schedule_interval) * 3
+    write_interval = int(hotdeal_schedule_interval) * 24
 
     # 명시적이므로 method를 사용하도록 함.
     if debug == "0":
@@ -43,11 +44,17 @@ def main(debug):
         getDeal('start')
     elif debug == "2":
         # print("N2T Start")
-        n2t_exe()
+        n2t_exe('start')
+    elif debug == 'operate':
+        sched = BlockingScheduler(timezone='Asia/Seoul')
+        sched.add_job(getDeal, 'interval', seconds=hotdeal_interval, id='getDeal', args=['start'])
+        sched.add_job(n2t_exe, 'interval', seconds=write_interval, id='n2t_exe', args=['start'])
+        sched.start()
 
 
 if __name__ == '__main__':
     # print_hi('PyCharm')
-    debug = "2"
+    debug = "operate"
     main(debug)
+
 
