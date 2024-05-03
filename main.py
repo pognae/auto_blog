@@ -9,6 +9,7 @@ from n2t import n2t_exe
 load_dotenv()
 
 mySecret = os.environ.get('MySecret')
+#3600초 = 1시간
 hotdeal_schedule_interval = os.environ.get('hotdeal_schedule_interval')
 
 

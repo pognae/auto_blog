@@ -3,10 +3,9 @@ apscheduler
 sqlalchemy
 tweepy
 beautifulsoup4
-
 requests
 selenium
 webdriver_manager
 tqdm
 lxml
-git+https://github.com/wsykala/notion-py.git
+#git+https://github.com/wsykala/notion-py.git
