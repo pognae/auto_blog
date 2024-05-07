@@ -10,7 +10,7 @@ load_dotenv()
 
 mySecret = os.environ.get('MySecret')
 #3600초 = 1시간
-hotdeal_schedule_interval = '3600'
+hotdeal_schedule_interval = os.environ.get('hotdeal_schedule_interval')
 
 
 def print_hi(name):
