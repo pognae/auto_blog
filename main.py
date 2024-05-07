@@ -10,13 +10,7 @@ load_dotenv()
 
 mySecret = os.environ.get('MySecret')
 #3600초 = 1시간
-hotdeal_schedule_interval = os.environ.get('hotdeal_schedule_interval')
-
-
-
-# deamon = True 속성을 주어 메인 프로세스가 종료되면 같이 종료되도록 함으로써
-# background에서 계속 돌아가는걸 방지하도록 하자
-# sched = BackgroundScheduler(daemon=True)
+hotdeal_schedule_interval = '3600'
 
 
 def print_hi(name):
