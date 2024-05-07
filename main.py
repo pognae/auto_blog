@@ -3,7 +3,7 @@ import os
 from apscheduler.schedulers.background import BlockingScheduler
 from database import *
 from hot_deal import getDeal
-from n2t import n2t_exe
+# from n2t import n2t_exe
 
 # load .env
 load_dotenv()
