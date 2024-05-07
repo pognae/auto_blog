@@ -4,8 +4,8 @@ sqlalchemy
 tweepy
 beautifulsoup4
 requests
-selenium
-#webdriver_manager
 tqdm
 lxml
+#selenium
+#webdriver_manager
 #git+https://github.com/wsykala/notion-py.git
