@@ -171,7 +171,7 @@ class Notion2Tistory:
 
 
 
-def n2t_exe(date):
+def n2t_exe():
     from config import cfg
 
     try:
