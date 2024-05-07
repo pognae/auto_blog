@@ -1,7 +1,7 @@
 python-dotenv
 apscheduler
 sqlalchemy
-tweepy
+#tweepy
 beautifulsoup4
 requests
 tqdm

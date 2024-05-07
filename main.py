@@ -39,11 +39,11 @@ def main(debug):
         getDeal('start')
     elif debug == "2":
         # print("N2T Start")
-        n2t_exe('start')
+        # n2t_exe('start')
     elif debug == 'operate':
         sched = BlockingScheduler(timezone='Asia/Seoul')
         sched.add_job(getDeal, 'interval', seconds=hotdeal_interval, id='getDeal', args=['start'])
-        sched.add_job(n2t_exe, 'interval', seconds=write_interval, id='n2t_exe', args=['start'])
+        # sched.add_job(n2t_exe, 'interval', seconds=write_interval, id='n2t_exe', args=['start'])
         sched.start()
 
 
