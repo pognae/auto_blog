@@ -22,19 +22,21 @@ twitter_api_key = os.environ.get('twitter_api_key')
 twitter_api_key_secret = os.environ.get('twitter_api_key_secret')
 twitter_access_token = os.environ.get('twitter_access_token')
 twitter_access_token_secret = os.environ.get('twitter_access_token_secret')
-
 visibility = os.environ.get('visibility')
 
 def getDeal(data):
     if image_file_delete_all() != "Y":
         return 'Fail'
 
-    # print('data : ' + data)
+    print('getDeal : ' + data)
+    returnStr = {}
+
+    response = requests.get(site_info_url)
     returnStr = {}
 
     # 핫딜 정보 가져오기(beautifulsoup4 사용)
     response = requests.get(hotdeal_info_url)
-    print(hotdeal_info_url)
+    print('hot deal site URL:' + hotdeal_info_url)
 
     if response.status_code != 200:
         print(response.status_code)
@@ -66,7 +68,7 @@ def getDeal(data):
         url = bsObject.find('meta', {'property': 'og:url'}).get('content')
         key = url.split('/')[3]
         post_url = bsObject.find('a', 'hotdeal_url')["href"]
-        print("111111111111:" + post_url)
+        print("Post URL:" + post_url)
 
         # testUsers = db_session.query(User).filter(User.name == 'test').first()
         # post_list = Post.query.filter(Post.post_key == key).first()
@@ -101,7 +103,11 @@ def post_write(title, image_url, post_url, key):
         files = {'uploadedfile': open(image_file_name, 'rb')}
         params = {'access_token': access_token, 'blogName': blogName, 'targetUrl': blogName, 'output': 'json'}
         rd = requests.post('https://www.tistory.com/apis/post/attach', params=params, files=files)
+        print('rd:' + rd.text)
+
         item = json.loads(rd.text)
+        print('item:' + item)
+
         test_image = item["tistory"]["replacer"]
 
 
@@ -199,3 +205,4 @@ def image_file_delete_all():
         print(e)
     finally:
         return retStr
+

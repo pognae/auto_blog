@@ -6,6 +6,6 @@ beautifulsoup4
 requests
 tqdm
 lxml
-#selenium
+selenium
 #webdriver_manager
 #git+https://github.com/wsykala/notion-py.git
