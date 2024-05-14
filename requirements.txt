@@ -9,3 +9,5 @@ lxml
 selenium
 #webdriver_manager
 #git+https://github.com/wsykala/notion-py.git
+pyautogui
+pyperclip
