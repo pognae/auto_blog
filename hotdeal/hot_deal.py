@@ -2,15 +2,13 @@ import os
 from bs4 import BeautifulSoup
 import json
 import requests
-import util
+from utils import util
 import urllib.request
 from urllib.request import urlopen
 import tweepy
-from models import Post, Blog
-from database import *
+from db.models import Post, Blog
+from db.database import *
 from dotenv import load_dotenv
-from datetime import datetime
-
 
 load_dotenv()
 
@@ -194,7 +192,7 @@ def image_file_delete_all():
     retStr = 'Y'
 
     try:
-        path = './'
+        path = '../'
         file_list = os.listdir(path)
 
         for file in file_list:

@@ -1,10 +1,8 @@
 from dotenv import load_dotenv
 import os
-from apscheduler.schedulers.background import BlockingScheduler
-from database import *
 # from hot_deal import getDeal
 # from n2t import n2t_exe
-from login import login
+from blog.naver.login import login
 
 
 # load .env
